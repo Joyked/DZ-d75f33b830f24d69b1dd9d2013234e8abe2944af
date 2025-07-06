@@ -19,14 +19,13 @@ public class CubeSpawner : BaseSpawner<Cube>
         _cubes = new List<Cube>();
         _bombSpawner.SetParameters(_poolCapacity, _poolMaxSize);
         base.Awake();
-        
+
         for (int i = _poolCapacity; i > 0; i--)
             _pool.Get();
     }
 
     protected override Cube CreateObject()
     {
-        PoolCapacity?.Invoke();
         Cube cube = Instantiate(_prefab);
         cube.Fell += ReturnToPool;
         _cubes.Add(cube);
@@ -37,12 +36,6 @@ public class CubeSpawner : BaseSpawner<Cube>
     {
         foreach (var cube in _cubes)
             cube.Fell -= ReturnToPool;
-    }
-
-    protected override void ActionOnDestroy(Cube obj)
-    {
-        obj.Fell -= ReturnToPool;
-        base.ActionOnDestroy(obj);
     }
 
     protected override void ActionOnRelease(Cube obj)

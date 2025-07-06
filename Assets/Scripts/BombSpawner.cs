@@ -6,7 +6,6 @@ public class BombSpawner : BaseSpawner<Bomb>
 {
    [SerializeField] private CubeSpawner _cubeSpawner;
    
-   
    public void SetParameters(int poolCapacity, int poolMaxSize)
    {
       _poolCapacity = poolCapacity;
@@ -39,12 +38,13 @@ public class BombSpawner : BaseSpawner<Bomb>
    private IEnumerator ExplosionTimer(float second, Bomb bomb)
    {
       float elapsedTime = 0f;
+      ColorChangerBomb _colorBomb = bomb.GetComponent<ColorChangerBomb>();
       
       while (elapsedTime < second)
       {
          float progress = elapsedTime / second;
          float newAlpha = Mathf.Lerp(1f, 0.1f, progress);
-         bomb.Repaint(newAlpha);
+         _colorBomb.Repaint(newAlpha);
          elapsedTime += Time.deltaTime;
          yield return null;
       }

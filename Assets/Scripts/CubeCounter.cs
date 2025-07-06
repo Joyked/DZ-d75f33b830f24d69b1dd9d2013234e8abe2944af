@@ -23,25 +23,22 @@ public class CubeCounter : Counter
     
     protected override void ResetCounterAllObject()
     {
-        _textAllSpawnObject.text = "Кубов заспавнено: ";
         base.ResetCounterAllObject();
+        _textAllSpawnObject.text = $"Кубов заспавнено: {_countAllObject}";
     }
 
     protected override void AddCounterEnableObject()
     {
-        _textEnableObject.text = "Кубов на сцене: ";
         base.AddCounterEnableObject();
+        _textEnableObject.text = $"Кубов на сцене: {_countEnableObject}";
     }
 
     protected override void TakeCounterEnableObject()
     {
-        _textEnableObject.text = "Кубов на сцене: ";
         base.TakeCounterEnableObject();
+        _textEnableObject.text = $"Кубов на сцене: {_countEnableObject}";
     }
 
-    protected virtual void ResetPoolCounter()
-    {
-        _textPoolCapacity.text = "Кубов в пуле: ";
-        base.ResetPoolCounter();
-    }
+    private void ResetPoolCounter(int count) =>
+        _textPoolCapacity.text = $"Кубов в пуле: {count}";
 }

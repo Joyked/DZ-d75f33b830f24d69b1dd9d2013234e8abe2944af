@@ -23,25 +23,22 @@ public class BombCounter : Counter
     
     protected override void ResetCounterAllObject()
     {
-        _textAllSpawnObject.text = "Бомб заспавнено: ";
         base.ResetCounterAllObject();
+        _textAllSpawnObject.text = $"Бомб заспавнено: {_countAllObject}";
     }
 
     protected override void AddCounterEnableObject()
     {
-        _textEnableObject.text = "Бомб на сцене: ";
         base.AddCounterEnableObject();
+        _textEnableObject.text = $"Бомб на сцене: {_countEnableObject}";
     }
     
     protected override void TakeCounterEnableObject()
     {
-        _textEnableObject.text = "Бомб на сцене: ";
         base.TakeCounterEnableObject();
+        _textEnableObject.text = $"Бомб на сцене: {_countEnableObject}";
     }
 
-    protected virtual void ResetPoolCounter()
-    {
-        _textPoolCapacity.text = "Бомб в пуле: ";
-        base.ResetPoolCounter();
-    }
+    protected virtual void ResetPoolCounter(int count) =>
+        _textPoolCapacity.text = $"Бомб в пуле: {count}";
 }
