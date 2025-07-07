@@ -6,10 +6,10 @@ public abstract class BaseSpawner<T> : MonoBehaviour where T : MonoBehaviour
 {
     [SerializeField] protected T _prefab;
 
-    public Action SpawnObject;
-    public Action EnableObject;
-    public Action DisableObject;
-    public Action<int> PoolCapacity; 
+    public Action ObjectSpawned;
+    public Action ObjectEnabled;
+    public Action ObjectDisabled;
+    public Action<int> СapacityPoolChanged; 
     
     protected ObjectPool<T> _pool;
     protected int _poolCapacity = 10;
@@ -29,16 +29,8 @@ public abstract class BaseSpawner<T> : MonoBehaviour where T : MonoBehaviour
         );
     }
 
-    private void Start()
-    {
-        PoolCapacity?.Invoke(_pool.CountAll);
-
-        for (int i = 0; i < _pool.CountAll; i++)
-        {
-            SpawnObject?.Invoke();
-            EnableObject?.Invoke();
-        }
-    }
+    private void Start() =>
+        СapacityPoolChanged?.Invoke(_pool.CountAll);
 
     protected virtual T CreateObject()
     {
@@ -48,15 +40,15 @@ public abstract class BaseSpawner<T> : MonoBehaviour where T : MonoBehaviour
     protected virtual void ActionOnGet(T obj)
     {
         obj.gameObject.SetActive(true);
-        EnableObject?.Invoke();
-        SpawnObject?.Invoke();
-        PoolCapacity?.Invoke(_pool.CountAll);
+        ObjectEnabled?.Invoke();
+        ObjectSpawned?.Invoke();
+        СapacityPoolChanged?.Invoke(_pool.CountAll);
     }
 
     protected virtual void ActionOnRelease(T obj)
     {
         obj.gameObject.SetActive(false);
-        DisableObject?.Invoke();
+        ObjectDisabled?.Invoke();
     }
 
     protected virtual void ActionOnDestroy(T obj) =>

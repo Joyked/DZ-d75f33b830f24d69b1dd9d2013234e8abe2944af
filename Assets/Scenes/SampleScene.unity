@@ -296,10 +296,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e268360e042894394b86066be08fc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawner: {fileID: 472571574}
   _textAllSpawnObject: {fileID: 1253574190}
   _textEnableObject: {fileID: 47065846}
   _textPoolCapacity: {fileID: 1826741168}
-  _spawner: {fileID: 472571574}
 --- !u!1 &242165102
 GameObject:
   m_ObjectHideFlags: 0
@@ -2292,10 +2292,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f6d92c3b37ce3649bc80ab4341cac94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawner: {fileID: 1332181358}
   _textAllSpawnObject: {fileID: 1601082871}
   _textEnableObject: {fileID: 2112874225}
   _textPoolCapacity: {fileID: 2003572554}
-  _spawner: {fileID: 1332181358}
 --- !u!1 &2112874223
 GameObject:
   m_ObjectHideFlags: 0

@@ -49,7 +49,7 @@ public class BombSpawner : BaseSpawner<Bomb>
          yield return null;
       }
       
-      bomb.Explode();
+      bomb.BlowUp();
       bomb.gameObject.SetActive(false);
       _pool.Release(bomb);
    }
