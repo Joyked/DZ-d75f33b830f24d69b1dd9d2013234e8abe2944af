@@ -1,46 +1,46 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class EnemyMover : MonoBehaviour
 {
-    public Transform player;
-    public float speed = 3f;
-    public float stoppingDistance = 2f;
-    public float stepOffset = 0.3f;
-    public float jumpForce = 8f;
+    [SerializeField] private Transform _player;
+    [SerializeField] private float _speed = 3f;
+    [SerializeField] private float _stoppingDistance = 2f;
+    [SerializeField] private float _stepOffset = 0.3f;
+    [SerializeField] private float _jumpForce = 8f;
 
-    private Rigidbody rb;
-    private float lastJumpTime;
+    private Rigidbody _rigidbody;
     private GameObject _ground;
 
-    void Start()
+    private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        rb.constraints = RigidbodyConstraints.FreezeRotation;
+        _rigidbody = GetComponent<Rigidbody>();
+        _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        Vector3 direction = player.position - transform.position;
+        Vector3 direction = _player.position - transform.position;
         float distance = direction.magnitude;
 
-        if (distance > stoppingDistance)
+        if (distance > _stoppingDistance)
         {
             Vector3 moveDir = direction.normalized;
-            rb.velocity = new Vector3(moveDir.x * speed, rb.velocity.y, moveDir.z * speed);
+            _rigidbody.velocity = new Vector3(moveDir.x * _speed, _rigidbody.velocity.y, moveDir.z * _speed);
         }
         else
         {
-            rb.velocity = new Vector3(0, rb.velocity.y, 0);
+            _rigidbody.velocity = new Vector3(0, _rigidbody.velocity.y, 0);
         }
     }
 
     private void OnCollisionEnter(Collision other)
     {
         if (IsGrounded() && other.gameObject != _ground &&
-            other.gameObject.transform.position.y < transform.position.y + stepOffset && other.gameObject.transform.localScale.y < stepOffset)
+            other.gameObject.transform.position.y < transform.position.y + _stepOffset && other.gameObject.transform.localScale.y < _stepOffset)
         {
             Debug.Log(other.gameObject.name);
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
         }
     }
     
