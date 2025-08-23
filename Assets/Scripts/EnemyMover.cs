@@ -10,16 +10,20 @@ public class EnemyMover : MonoBehaviour
     [SerializeField] private float _jumpForce = 8f;
 
     private Rigidbody _rigidbody;
-    private GameObject _ground;
+    private GroundChecker _groundChecker;
 
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+        
+        _groundChecker = new GroundChecker(transform, GetComponent<Collider>());
     }
 
     private void FixedUpdate()
     {
+        _groundChecker.CheckGrounded();
+        
         Vector3 direction = _player.position - transform.position;
         float distance = direction.magnitude;
 
@@ -36,25 +40,12 @@ public class EnemyMover : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (IsGrounded() && other.gameObject != _ground &&
-            other.gameObject.transform.position.y < transform.position.y + _stepOffset && other.gameObject.transform.localScale.y < _stepOffset)
+        if (_groundChecker.IsGrounded && 
+            other.gameObject != _groundChecker.Ground &&
+            _groundChecker.IsStepHeightReachable(other.gameObject, _stepOffset))
         {
             Debug.Log(other.gameObject.name);
             _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
         }
-    }
-    
-    private bool IsGrounded()
-    {
-        _ground = null;
-        float checkDistance = GetComponent<Collider>().bounds.extents.y + 0.2f;
-    
-        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, checkDistance))
-        {
-            _ground = hit.collider.gameObject;
-            return true;
-        }
-    
-        return false;
     }
 }
