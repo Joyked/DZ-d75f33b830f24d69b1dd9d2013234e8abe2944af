@@ -4,7 +4,7 @@ using UnityEngine;
 public class CubeSpawner : MonoBehaviour
 {
     [SerializeField] private Transform _transform;
-    [SerializeField] private ReloadTrigger _trigger;
+    [SerializeField] private CatapultTrigger _trigger;
     
     private Rigidbody _rigidbody;
 
@@ -15,7 +15,7 @@ public class CubeSpawner : MonoBehaviour
         _trigger.InPositioned += Reload;
 
     private void OnDisable() =>
-        _trigger.InPositioned += Reload;
+        _trigger.InPositioned -= Reload;
 
     private void Reload()
     {

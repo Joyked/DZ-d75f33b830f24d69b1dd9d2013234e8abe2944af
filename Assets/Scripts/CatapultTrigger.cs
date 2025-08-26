@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class ReloadTrigger : MonoBehaviour
+public class CatapultTrigger : MonoBehaviour
 {
     public event Action InPositioned;
     
