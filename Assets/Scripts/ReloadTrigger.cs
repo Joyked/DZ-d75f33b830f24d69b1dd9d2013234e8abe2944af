@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class ReloadTrigger : MonoBehaviour
 {
-    public event Action InPosition;
+    public event Action InPositioned;
     
     private void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent(out СatapultController controller))
-            InPosition?.Invoke();
+        if(other.TryGetComponent(out Сatapult controller))
+            InPositioned?.Invoke();
     }
 }

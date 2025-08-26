@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class SpawnCube : MonoBehaviour
+public class CubeSpawner : MonoBehaviour
 {
     [SerializeField] private Transform _transform;
     [SerializeField] private ReloadTrigger _trigger;
@@ -12,10 +12,10 @@ public class SpawnCube : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
 
     private void OnEnable() =>
-        _trigger.InPosition += Reload;
+        _trigger.InPositioned += Reload;
 
     private void OnDisable() =>
-        _trigger.InPosition += Reload;
+        _trigger.InPositioned += Reload;
 
     private void Reload()
     {

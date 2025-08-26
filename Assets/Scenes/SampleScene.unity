@@ -425,6 +425,7 @@ GameObject:
   - component: {fileID: 258066244}
   - component: {fileID: 258066243}
   - component: {fileID: 258066242}
+  - component: {fileID: 258066245}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -498,6 +499,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 19.15, y: 0, z: 0}
+--- !u!114 &258066245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 258066241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e6d0a3f18ae791428ed62048a2985c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &414017208
 GameObject:
   m_ObjectHideFlags: 0
@@ -1165,6 +1178,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 444ce8937c4109a498ce0e20f6833f51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fierSpring: 15
+  _reloadSpring: 1.3
+  _inputReader: {fileID: 258066245}
 --- !u!1 &1269699099
 GameObject:
   m_ObjectHideFlags: 0
@@ -1368,6 +1384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pushForce: 100
+  _inputReader: {fileID: 258066245}
 --- !u!59 &1343529731
 HingeJoint:
   m_ObjectHideFlags: 0
